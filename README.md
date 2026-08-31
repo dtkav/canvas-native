@@ -1,82 +1,80 @@
 # canvas-skill
 
-An agent skill for writing and editing [JSON Canvas](https://jsoncanvas.org)
-files — the format Obsidian Canvas uses.
+A skill that lets an agent write and edit [JSON Canvas](https://jsoncanvas.org)
+files, the format Obsidian Canvas uses, and then look at what it produced.
 
-Authoring a canvas is placing boxes by arithmetic. Every node carries an
-absolute `x/y/width/height`, nothing reflows, and nothing reports that a label
-overran its box or that an edge now cuts through a group. An agent writing one
-is working blind, and blind authors produce diagrams with overlaps they then
-describe as fine.
+Every node in a canvas carries an absolute rect. Text does not reflow, boxes do
+not grow to fit their contents, and the file records nothing when a label
+overruns its box or an edge crosses a group. An agent writing one gets no
+feedback at all, so it ships overlapping boxes and reports that the layout
+looks fine.
 
-This closes the loop. It is a skill file that teaches the format and its
-pitfalls, and a renderer the agent can run after every edit to see what it
-just wrote.
+This repository holds a skill file covering the format and the places it goes
+wrong, and a renderer the agent runs after each edit.
 
 ## Install
 
 ```bash
 cargo build --release
-mkdir -p ~/.claude/skills/canvas
-cp SKILL.md target/release/canvas-render ~/.claude/skills/canvas/
+cp target/release/canvas-render ~/.local/bin/
 ```
 
-No system dependencies, and nothing to install alongside it: Inter is embedded,
-so text is correct on a machine with no fonts and no Obsidian.
+Then register this directory with your agent as a skill, or copy `SKILL.md`
+into wherever it reads skills from. Inter ships in `assets/`, so the binary
+draws correct text on a machine with no fonts installed and no Obsidian.
 
-## What the agent gets
-
-**The format, and where it bites.** Z-order is array order, so a group has to
-precede its members. Text starts 17px down and 16px in, so the wrapping width
-is `width - 32`. Content that overruns the height is clipped, not scrolled. A
-group's label is drawn *above* its box. An edge leaves a face along its normal
-and reaches out `clamp(distance / 2, 70, 150)` before curving, so the sides you
-pick decide whether it runs clean or loops across a neighbour.
-
-**Two ways to look at the result**, because they answer different questions:
+## Use
 
 ```bash
-canvas-render file.canvas /tmp/c.svg --agent   # positions, as readable text
-canvas-render file.canvas /tmp/c.png --agent   # appearance, which needs an image
+canvas-render file.canvas out.svg --agent
+canvas-render file.canvas out.png --agent
 ```
 
-The SVG carries every box, curve, and text run with its coordinates, small
-enough to read directly. The PNG is the only way to judge crowding and
-collision. `--agent` drops the embedded fonts and sizes the image below the
-point where viewers rescale it, since rescaling shifts every coordinate away
-from the ones in the SVG.
+The SVG lists every box, curve, and text run with its coordinates, and stays
+small enough for the agent to read as text. The PNG shows crowding and
+collision, which coordinates alone will not settle. `--agent` leaves the fonts
+out, since 2.8 MB of base64 buries the markup, and caps the image below the
+size at which viewers begin rescaling.
 
-**A way to check one part after an edit** — `--focus a,b,c` crops to those
-nodes and scales up, so a corner of a large diagram is examined at
-magnification rather than as a postage stamp.
+After editing part of a large canvas, `--focus a,b,c` crops to those nodes and
+scales the crop up, so the agent examines that corner at magnification instead
+of hunting for it in a full render.
 
-## Producing one for a person
+For a person to read:
 
 ```bash
 canvas-render file.canvas diagram.png            # 2x pixel ratio
-canvas-render file.canvas diagram.svg            # Inter embedded, so it travels
+canvas-render file.canvas diagram.svg            # Inter embedded
 canvas-render file.canvas diagram.svg --light    # light theme
 ```
 
 ## Fidelity
 
-The render has to be the real thing. An approximation is worse than none,
-because the agent believes it: an early lookalike put group labels inside the
-box and edge labels at the straight-line midpoint, and produced confident,
-wrong reports about a file that was fine.
+An approximate render misleads an agent worse than no render, because the agent
+believes what it sees. An early lookalike drew group labels inside the box and
+placed edge labels at the straight-line midpoint. It went on to report overlaps
+in a file that had none.
 
-So the constants are measured off the application rather than guessed, and the
-match is checked rather than asserted — edge paths are identical across all
-sixteen side pairs. `NOTES.md` records what still differs, chiefly optical
-sizing at heading sizes.
+The constants in `assets/theme-*.json` therefore come from measuring the
+running application. `verify-native.mjs` diffs the edge paths this renderer emits
+against the ones Obsidian draws, and finds them identical across all sixteen
+side pairs. `NOTES.md` records what still differs; optical sizing at heading
+sizes accounts for most of it.
+
+## Limits
+
+Text advances run about 2% wide at heading sizes, which can move a wrap point
+on a long heading. Math renders as its source text. Code blocks arrive without
+syntax highlighting, `link` nodes show the URL rather than the page title, and
+group backgrounds are ignored.
 
 ## Licensing
 
-MIT; see `LICENSE`.
+MIT, in `LICENSE`.
 
-**Inter** is embedded, six instances (400/600/700, upright and italic), under
-the SIL Open Font License 1.1 by The Inter Project Authors. The licence is at
-`assets/Inter-LICENSE.txt` and travels with the font, as the OFL requires.
+The binary embeds six instances of Inter (400/600/700, upright and italic)
+under the SIL Open Font License 1.1 by The Inter Project Authors.
+`assets/Inter-LICENSE.txt` carries that licence, as the OFL requires.
 
-**Obsidian** is a trademark of Dynalist Inc. This project is not affiliated
-with or endorsed by them, and contains no Obsidian code.
+Obsidian is a trademark of Dynalist Inc. This project has no affiliation with
+them and contains none of their code.

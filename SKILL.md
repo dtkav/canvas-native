@@ -1,110 +1,110 @@
 ---
 name: canvas
-description: Write, edit, and check JSON Canvas (.canvas) files — the format Obsidian Canvas uses — and render them to SVG or PNG with a self-contained binary, no Obsidian and no browser. Use whenever authoring or modifying a canvas, checking a layout, or attaching a diagram, and instead of guessing at how a canvas looks.
+description: Write, edit, and check JSON Canvas (.canvas) files, the format Obsidian Canvas uses, and render them to SVG or PNG with a self-contained binary that needs no Obsidian and no browser. Use whenever authoring or modifying a canvas, checking a layout, or attaching a diagram, and in place of guessing at how a canvas looks.
 ---
 
 # Canvas
 
-Authoring a canvas is placing boxes by arithmetic. Every node carries an
-absolute rect, nothing reflows, and nothing tells you a label overran its box
-or that an edge now cuts through a group. Write one without looking and it
-will have overlaps you never see.
+Authoring a canvas means placing boxes by arithmetic. Every node carries an
+absolute rect, nothing reflows, and the file records nothing when a label
+overruns its box or an edge cuts through a group. Write one without looking and
+it will carry overlaps you never see.
 
-So: render after every edit, and read the render.
+Render after every edit, and read the render.
 
 ```bash
-CR=~/.claude/skills/canvas/canvas-render
-$CR file.canvas /tmp/c.svg --agent   # positions, as text you can read
-$CR file.canvas /tmp/c.png --agent   # appearance, which only an image shows
+canvas-render file.canvas /tmp/c.svg --agent   # positions, as text you can read
+canvas-render file.canvas /tmp/c.png --agent   # appearance, which needs an image
 ```
+
+The binary sits beside this file if it is not already on your PATH.
 
 ## The format
 
-JSON Canvas 1.0 — `{"nodes": [...], "edges": [...]}`.
+JSON Canvas 1.0, `{"nodes": [...], "edges": [...]}`.
 
 Every node has `id`, `type`, `x`, `y`, `width`, `height`, and optionally
-`color`. `y` grows downward. **Array order is z-order**: later nodes paint
-over earlier ones, so a group must be listed before the nodes it contains.
+`color`. `y` grows downward. Array order sets z-order: later nodes paint over
+earlier ones, so list a group before the nodes it contains.
 
 | `type` | carries |
 | --- | --- |
-| `text` | `text` — markdown |
-| `file` | `file` — a vault-relative path; optional `subpath`, e.g. `#Heading` |
+| `text` | `text`, markdown |
+| `file` | `file`, a vault-relative path, plus an optional `subpath` like `#Heading` |
 | `link` | `url` |
-| `group` | optional `label` |
+| `group` | an optional `label` |
 
 Edges take `id`, `fromNode`, `toNode`, and optionally `fromSide` / `toSide`
-(`top`\|`right`\|`bottom`\|`left`), `fromEnd` / `toEnd` (`none`\|`arrow` —
-arrow on the `to` end unless you say otherwise), `label`, and `color`.
+(`top`, `right`, `bottom`, `left`), `fromEnd` / `toEnd` (`none` or `arrow`,
+defaulting to an arrow on the `to` end), `label`, and `color`.
 
-`color` is `"1"`–`"6"` — red, orange, yellow, green, cyan, purple — or a hex
-string. Omit it and the node uses the theme's own border.
+`color` takes `"1"` through `"6"` for red, orange, yellow, green, cyan, and
+purple, or a hex string. Omit it and the node keeps the theme border.
 
 ## Sizing a node
 
-This is where a blind author goes wrong, so use the numbers.
+Use the numbers rather than an estimate.
 
-- Text starts **17px** below the node top and is inset **16px** each side, so
-  the wrapping width is `width - 32`.
-- Body text is 16px on a 24px line. Headings run 19–26px and carry a **40px
-  top margin**; paragraphs carry 16px. Adjacent margins collapse to the larger.
-- A **group's label sits above its box**, not inside it. Leave room above a
-  group, not within it.
-- Content that overruns the height is **clipped, not scrolled**. Height is a
-  promise you have to keep.
+- Text starts 17px below the node top and sits 16px in from each side, so it
+  wraps at `width - 32`.
+- Body text is 16px on a 24px line. Headings run 19 to 26px and carry a 40px
+  top margin, paragraphs 16px. Adjacent margins collapse to the larger.
+- A group's label draws above its box, so leave room above a group rather than
+  inside it.
+- Content taller than the node is clipped and not scrolled, so the height has
+  to fit whatever you put in.
 
 ## Routing an edge
 
 An edge leaves the midpoint of a side, 7px out, and heads straight out from
-that face before curving: the control point sits `clamp(distance / 2, 70, 150)`
-along the face normal.
+that face before it curves. The control point sits `clamp(distance / 2, 70,
+150)` along the face normal.
 
-So the sides decide the shape, not just the endpoints. Two faces pointing at
-each other give a smooth S. A face pointing *away* from its target loops out
-by roughly three-quarters of that reach before turning back, which can carry
-the line across a box that looked well clear of it. Left unset, each end picks
-the face it most directly presents to the other node — usually what you want;
-set `fromSide` / `toSide` when it isn't.
+The sides therefore decide the shape and not only the endpoints. Two faces
+pointing at each other give a smooth S. A face pointing away from its target
+loops out by about three quarters of that reach before turning back, which
+can carry the line across a box that looked well clear of it. Left unset, each
+end picks the face it presents most squarely to the other node. Set `fromSide`
+and `toSide` when that choice routes the line through something.
 
 ## Reading your own work
 
-Render **both** forms; they answer different questions.
+Render both forms. They answer different questions.
 
-The SVG is ground truth for *positions*: every box, curve, and text run with
-its coordinates, small enough to read as text. The PNG is the only way to
-judge *appearance* — overlap, crowding, a label colliding with an edge.
+The SVG gives you positions: every box, curve, and text run with its
+coordinates, small enough to read as text. The PNG gives you appearance,
+covering overlap, crowding, and a label colliding with an edge.
 
-`--agent` drops the embedded fonts, because 2.8 MB of base64 buries the
-markup, and caps the image at 2000px, where common viewers start rescaling.
-Being rescaled wastes detail and shifts every coordinate away from the ones
-in the SVG.
+`--agent` drops the embedded fonts, since 2.8 MB of base64 buries the markup,
+and caps the image at 2000px, where common viewers start rescaling. Rescaling
+wastes detail and shifts every coordinate away from the ones in the SVG.
 
-After changing part of a canvas, render just that part:
+After changing part of a canvas, render that part:
 
 ```bash
-$CR file.canvas /tmp/c.png --agent --focus envoy,vault,tap
+canvas-render file.canvas /tmp/c.png --agent --focus envoy,vault,tap
 ```
 
-The crop is the bounding box of those nodes plus surroundings, scaled up to
-fill the frame, so a small region is examined at magnification instead of
-rendering as a postage stamp.
+The crop takes the bounding box of those nodes plus their surroundings and
+scales it up to fill the frame, so you examine a small region at magnification
+instead of rendering it as a postage stamp.
 
-**Look before judging a layout.** If you are about to say "that label
-overlaps" or "that edge is clipped", render and look. An approximation of the
-drawing is worse than none, because you will believe it: an earlier lookalike
-put group labels inside the box and edge labels at the straight-line midpoint,
-and produced confident, wrong reports about a file that was fine.
+Look before judging a layout. If you are about to say that a label overlaps or
+an edge is clipped, render and look first. An approximation of the drawing
+misleads you worse than no drawing, because you will believe it: an earlier
+lookalike put group labels inside the box and edge labels at the straight-line
+midpoint, then reported overlaps in a file that had none.
 
 ## Producing one for a person
 
 ```bash
-$CR file.canvas diagram.png            # 2x pixel ratio
-$CR file.canvas diagram.svg            # Inter embedded, so it travels
-$CR file.canvas diagram.svg --light    # light theme
+canvas-render file.canvas diagram.png            # 2x pixel ratio
+canvas-render file.canvas diagram.svg            # Inter embedded, so it travels
+canvas-render file.canvas diagram.svg --light    # light theme
 ```
 
-Send the SVG when it may be edited or scaled, the PNG when it will only be
-looked at.
+Send the SVG when someone may edit or scale it, the PNG when they will only
+look at it.
 
 ## Options
 
@@ -120,7 +120,7 @@ looked at.
 ## Limits
 
 Text advances run about 2% wide at heading sizes, which can move a wrap point
-on a long heading — so leave a little slack rather than sizing a box to a
-heading that only just fits. Math renders as its source text, code blocks are
-not syntax highlighted, `link` nodes show the URL rather than the page title,
-and group backgrounds are ignored.
+on a long heading, so leave slack rather than sizing a box to a heading that
+barely fits. Math renders as its source text. Code blocks arrive without
+syntax highlighting, `link` nodes show the URL rather than the page title, and
+group backgrounds are ignored.

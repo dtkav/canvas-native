@@ -13,17 +13,17 @@ at one size:
 | opsz=20 | 107.17 |
 | Chrome | 107.42 |
 
-Currently pinned at `opsz=16`, so 16px body text is right and headings
-(17–26px) run ~2% wide — Chrome opens the axis as the size grows, which
-narrows the advances. A wrong advance moves the wrap point, and every line
-after it inherits the shift.
+The shipping instance is pinned at `opsz=16`, so 16px body text is right and
+headings (17 to 26px) run about 2% wide. Chrome opens the axis as the size
+grows, which narrows the advances. A wrong advance moves the wrap point, and
+every line after it inherits the shift.
 
 Ways out, in order of preference:
 
 1. A text stack that applies variation axes at shaping time. cosmic-text 0.12
    does not expose variation coordinates; candidates are parley, or swash
    directly, or rustybuzz plus our own line breaker.
-2. One static instance per size the theme uses — 7 sizes x 6 weight/slant
+2. One static instance per size the theme uses: 7 sizes x 6 weight/slant
    combinations is roughly 18 MB of embedded font.
 3. Leave it, and accept the heading difference.
 
