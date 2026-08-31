@@ -31,12 +31,11 @@ Verify with `compare.mjs`, which reports per-run x drift against the app.
 
 ## Fixtures
 
-`fixtures/make-fixtures.py` writes the conformance canvases into a vault,
-along with the note and image the `file` nodes point at: markdown
-constructs, node types, colours, edges (all sixteen side pairs), unicode,
-extremes, nesting, inline edge cases, and z-order.
-`extract-fixture.mjs` records what Obsidian rendered; `compare.mjs` diffs this
-renderer against it.
+`fixtures/make-fixtures.py` writes eight conformance canvases into a vault,
+along with the note and image the `file` nodes point at: markdown constructs,
+node types, edges (all sixteen side pairs), unicode, extremes, nesting, inline
+edge cases, and z-order. `extract-fixture.mjs` records what Obsidian rendered
+for each; `compare.mjs` diffs this renderer against that.
 
 ## Not implemented
 

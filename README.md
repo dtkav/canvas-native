@@ -1,66 +1,74 @@
-# canvas-render
+# canvas-skill
 
-Renders a [JSON Canvas](https://jsoncanvas.org) file — the format Obsidian
-Canvas writes — to SVG or PNG. One self-contained binary: no Obsidian, no
-browser, and no font installed on the machine.
+An agent skill for writing and editing [JSON Canvas](https://jsoncanvas.org)
+files — the format Obsidian Canvas uses.
 
-```bash
-canvas-render architecture.canvas diagram.png
-canvas-render architecture.canvas diagram.svg --light
-```
+Authoring a canvas is placing boxes by arithmetic. Every node carries an
+absolute `x/y/width/height`, nothing reflows, and nothing reports that a label
+overran its box or that an edge now cuts through a group. An agent writing one
+is working blind, and blind authors produce diagrams with overlaps they then
+describe as fine.
 
-## Options
+This closes the loop. It is a skill file that teaches the format and its
+pitfalls, and a renderer the agent can run after every edit to see what it
+just wrote.
 
-| | |
-| --- | --- |
-| `--light` | light theme; dark is the default |
-| `--focus a,b,c` | render only these nodes and their surroundings |
-| `--region x,y,w,h` | render only this area, in canvas coordinates |
-| `--max <px>` | cap the longest edge of the image |
-| `--scale <n>` | pixel ratio when the size is not capped |
-| `--agent` | SVG without embedded fonts, image sized so no viewer rescales it |
-
-The output format follows the extension. SVG embeds Inter as `@font-face`
-data URIs by default, so the text is right on a machine with no fonts
-installed; PNG renders at 2x.
-
-`--focus` and `--region` crop to a part of the canvas and scale it up to fill
-the frame, which is how you examine one corner of a large diagram without
-rendering the whole thing and squinting.
-
-`--agent` is for a program reading the output rather than a person looking at
-it. It drops the embedded fonts, since 2.8 MB of base64 buries the markup a
-reader wants, and caps the image where common viewers begin rescaling.
-
-## What it renders
-
-All four node types — `text`, `file`, `link`, `group` — in array order, so
-z-order is the spec's. `file` nodes embed the note or image they point at,
-resolved against the vault the canvas sits in.
-
-Markdown covers headings, paragraphs, lists to any depth, quotes, callouts,
-tables, code blocks, rules, and inline bold, italic, code, strikethrough,
-highlight, wikilinks, external links, and tags.
-
-Edges carry labels, arrowheads on either end, the six preset colours and
-arbitrary hex, and the side-to-side routing Obsidian uses, including the
-side it picks when the file does not name one.
-
-## Building
+## Install
 
 ```bash
 cargo build --release
+mkdir -p ~/.claude/skills/canvas
+cp SKILL.md target/release/canvas-render ~/.claude/skills/canvas/
 ```
 
-No system dependencies. Inter ships in `assets/`, so the binary is the only
-artefact you need.
+No system dependencies, and nothing to install alongside it: Inter is embedded,
+so text is correct on a machine with no fonts and no Obsidian.
 
-## Limits
+## What the agent gets
 
-Text advances run about 2% wide at heading sizes, which can move a wrap point
-on a long heading. Math renders as its source text, code blocks are not syntax
-highlighted, `link` nodes show the URL rather than the page title, and group
-backgrounds are ignored. `NOTES.md` has the detail.
+**The format, and where it bites.** Z-order is array order, so a group has to
+precede its members. Text starts 17px down and 16px in, so the wrapping width
+is `width - 32`. Content that overruns the height is clipped, not scrolled. A
+group's label is drawn *above* its box. An edge leaves a face along its normal
+and reaches out `clamp(distance / 2, 70, 150)` before curving, so the sides you
+pick decide whether it runs clean or loops across a neighbour.
+
+**Two ways to look at the result**, because they answer different questions:
+
+```bash
+canvas-render file.canvas /tmp/c.svg --agent   # positions, as readable text
+canvas-render file.canvas /tmp/c.png --agent   # appearance, which needs an image
+```
+
+The SVG carries every box, curve, and text run with its coordinates, small
+enough to read directly. The PNG is the only way to judge crowding and
+collision. `--agent` drops the embedded fonts and sizes the image below the
+point where viewers rescale it, since rescaling shifts every coordinate away
+from the ones in the SVG.
+
+**A way to check one part after an edit** — `--focus a,b,c` crops to those
+nodes and scales up, so a corner of a large diagram is examined at
+magnification rather than as a postage stamp.
+
+## Producing one for a person
+
+```bash
+canvas-render file.canvas diagram.png            # 2x pixel ratio
+canvas-render file.canvas diagram.svg            # Inter embedded, so it travels
+canvas-render file.canvas diagram.svg --light    # light theme
+```
+
+## Fidelity
+
+The render has to be the real thing. An approximation is worse than none,
+because the agent believes it: an early lookalike put group labels inside the
+box and edge labels at the straight-line midpoint, and produced confident,
+wrong reports about a file that was fine.
+
+So the constants are measured off the application rather than guessed, and the
+match is checked rather than asserted — edge paths are identical across all
+sixteen side pairs. `NOTES.md` records what still differs, chiefly optical
+sizing at heading sizes.
 
 ## Licensing
 

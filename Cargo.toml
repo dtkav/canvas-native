@@ -3,8 +3,8 @@ name = "canvas-render"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-description = "Render Obsidian .canvas files to SVG or PNG without Obsidian or a browser"
-repository = ""
+description = "Render JSON Canvas files to SVG or PNG without Obsidian or a browser — the renderer behind the canvas agent skill"
+repository = "https://github.com/dtkav/canvas-skill"
 
 [[bin]]
 name = "canvas-render"
