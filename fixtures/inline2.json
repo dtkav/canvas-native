@@ -1,0 +1,547 @@
+{
+ "nodes": [
+  {
+   "id": "escapes",
+   "type": "text",
+   "runs": [
+    {
+     "text": "Escaped *not italic* and **not bold** and `not ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 19.09,
+     "w": 334.08,
+     "h": 19
+    },
+    {
+     "text": "code`",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 43.09,
+     "w": 39.77,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 48
+    }
+   ]
+  },
+  {
+   "id": "adjacent",
+   "type": "text",
+   "runs": [
+    {
+     "text": "bold",
+     "tag": "strong",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 19.09,
+     "w": 33.12,
+     "h": 19
+    },
+    {
+     "text": "italic",
+     "tag": "em",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 50.12,
+     "y": 19.09,
+     "w": 35.56,
+     "h": 19
+    },
+    {
+     "text": "code",
+     "tag": "code",
+     "cls": "",
+     "fontSize": 14,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 89.87,
+     "y": 21.09,
+     "w": 33.72,
+     "h": 16
+    },
+    {
+     "text": "strike",
+     "tag": "del",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "line-through",
+     "x": 127.78,
+     "y": 19.09,
+     "w": 40.72,
+     "h": 19
+    },
+    {
+     "text": " with no spaces between",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 168.5,
+     "y": 19.09,
+     "w": 178.16,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "nested",
+   "type": "text",
+   "runs": [
+    {
+     "text": "bold with ",
+     "tag": "strong",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 19.09,
+     "w": 72.64,
+     "h": 19
+    },
+    {
+     "text": "italic",
+     "tag": "em",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 89.64,
+     "y": 19.09,
+     "w": 35.8,
+     "h": 19
+    },
+    {
+     "text": " inside",
+     "tag": "strong",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 125.44,
+     "y": 19.09,
+     "w": 48.27,
+     "h": 19
+    },
+    {
+     "text": " and ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 173.7,
+     "y": 19.09,
+     "w": 36.14,
+     "h": 19
+    },
+    {
+     "text": "italic with ",
+     "tag": "em",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 209.84,
+     "y": 19.09,
+     "w": 74.66,
+     "h": 19
+    },
+    {
+     "text": "bold",
+     "tag": "strong",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 284.5,
+     "y": 19.09,
+     "w": 32.41,
+     "h": 19
+    },
+    {
+     "text": " inside",
+     "tag": "em",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 316.91,
+     "y": 19.09,
+     "w": 47.41,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "awkward",
+   "type": "text",
+   "runs": [
+    {
+     "text": "snake_case_word stays, a",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 19.09,
+     "w": 183.84,
+     "h": 19
+    },
+    {
+     "text": "b",
+     "tag": "em",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "italic",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 200.84,
+     "y": 19.09,
+     "w": 9.27,
+     "h": 19
+    },
+    {
+     "text": "c emphasises, 5 * 3 = 15 ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 210.11,
+     "y": 19.09,
+     "w": 168.41,
+     "h": 19
+    },
+    {
+     "text": "does not",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 43.09,
+     "w": 63.84,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 48
+    }
+   ]
+  },
+  {
+   "id": "codespan",
+   "type": "text",
+   "runs": [
+    {
+     "text": "code with ` backtick",
+     "tag": "code",
+     "cls": "",
+     "fontSize": 14,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 21.19,
+     "y": 21.09,
+     "w": 168.58,
+     "h": 16
+    },
+    {
+     "text": " and ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 193.95,
+     "y": 19.09,
+     "w": 36.14,
+     "h": 19
+    },
+    {
+     "text": "a * b",
+     "tag": "code",
+     "cls": "",
+     "fontSize": 14,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 234.28,
+     "y": 21.09,
+     "w": 42.16,
+     "h": 16
+    },
+    {
+     "text": " inside code",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 280.63,
+     "y": 19.09,
+     "w": 87.61,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "linkstyle",
+   "type": "text",
+   "runs": [
+    {
+     "text": "bold link",
+     "tag": "strong",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "600",
+     "fontStyle": "normal",
+     "color": "rgb(97, 175, 239)",
+     "decoration": "none",
+     "x": 17,
+     "y": 19.09,
+     "w": 64.22,
+     "h": 19
+    },
+    {
+     "text": " and ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 95.61,
+     "y": 19.09,
+     "w": 36.14,
+     "h": 19
+    },
+    {
+     "text": "italic link",
+     "tag": "a",
+     "cls": "external-link",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "italic",
+     "color": "rgb(97, 175, 239)",
+     "decoration": "none",
+     "x": 131.75,
+     "y": 19.09,
+     "w": 66.78,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  }
+ ],
+ "edges": []
+}

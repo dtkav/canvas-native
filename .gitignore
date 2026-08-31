@@ -1,0 +1,9 @@
+# build output
+/canvas-render
+/target/
+
+# rendered examples
+/out/
+
+# local build workflow
+/build-remote.sh

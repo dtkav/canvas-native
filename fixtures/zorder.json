@@ -1,0 +1,177 @@
+{
+ "nodes": [
+  {
+   "id": "under",
+   "type": "text",
+   "runs": [
+    {
+     "text": "under",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 61.88,
+     "h": 28
+    },
+    {
+     "text": "should be behind the group",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 63.16,
+     "w": 201.97,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 354,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 354,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "over-group",
+   "type": "group",
+   "runs": [
+    {
+     "text": "group painted after",
+     "tag": "div",
+     "cls": "canvas-group-label",
+     "fontSize": 22.5,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(136, 136, 136)",
+     "decoration": "none",
+     "x": 8,
+     "y": -33.5,
+     "w": 198.17,
+     "h": 27
+    }
+   ],
+   "blocks": [],
+   "label": {
+    "text": "group painted after",
+    "x": 0,
+    "y": -34.5,
+    "w": 214.17,
+    "h": 30.5
+   }
+  },
+  {
+   "id": "above",
+   "type": "text",
+   "runs": [
+    {
+     "text": "above",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 63.66,
+     "h": 28
+    },
+    {
+     "text": "painted last",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 63.16,
+     "w": 86.41,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 354,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 354,
+     "h": 24
+    }
+   ]
+  }
+ ],
+ "edges": []
+}

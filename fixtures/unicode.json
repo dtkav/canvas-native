@@ -1,0 +1,307 @@
+{
+ "nodes": [
+  {
+   "id": "cjk",
+   "type": "text",
+   "runs": [
+    {
+     "text": "日本語の見出し",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 161.83,
+     "h": 28
+    },
+    {
+     "text": "日本語のテキストが折り返されるかどうかを確認し",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 63.16,
+     "w": 367.53,
+     "h": 19
+    },
+    {
+     "text": "ます。",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 87.16,
+     "w": 46.41,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 374,
+     "h": 48
+    }
+   ]
+  },
+  {
+   "id": "emoji",
+   "type": "text",
+   "runs": [
+    {
+     "text": "Emoji ✅ 🎉",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 125.77,
+     "h": 28
+    },
+    {
+     "text": "mixed ✅ text 🚀 with emoji 🧪 inline",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 63.16,
+     "w": 274.44,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "rtl",
+   "type": "text",
+   "runs": [
+    {
+     "text": "עברית",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 376.78,
+     "y": 17.09,
+     "w": -34.22,
+     "h": 28
+    },
+    {
+     "text": "שלום עולם, זהו טקסט מימין לשמאל.",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 379.3,
+     "y": 63.16,
+     "w": -224.28,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  },
+  {
+   "id": "combining",
+   "type": "text",
+   "runs": [
+    {
+     "text": "Combining",
+     "tag": "h2",
+     "cls": "",
+     "fontSize": 23.39,
+     "fontWeight": "680",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 111.06,
+     "h": 28
+    },
+    {
+     "text": "Zalgo á̀̂ and é vs é",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 63.16,
+     "w": 128.98,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "el-h2",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 28.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.16,
+     "w": 374,
+     "h": 24
+    }
+   ]
+  }
+ ],
+ "edges": []
+}

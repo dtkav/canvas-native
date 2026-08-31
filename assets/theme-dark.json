@@ -1,0 +1,112 @@
+{
+  "background": "#1C1C1C",
+  "node": {
+    "bg": "#1C1C1C",
+    "border": "#7e7e7e",
+    "borderWidth": 1.0,
+    "radius": 8.0,
+    "padX": 16.0
+  },
+  "text": "#dadada",
+  "font": "Inter",
+  "headings": [
+    {
+      "size": 25.888,
+      "weight": 700,
+      "line": 31.0656
+    },
+    {
+      "size": 23.392,
+      "weight": 680,
+      "line": 28.0704
+    },
+    {
+      "size": 21.088,
+      "weight": 660,
+      "line": 27.4144
+    },
+    {
+      "size": 19.008,
+      "weight": 640,
+      "line": 26.6112
+    },
+    {
+      "size": 17.216,
+      "weight": 620,
+      "line": 25.824
+    },
+    {
+      "size": 16.0,
+      "weight": 600,
+      "line": 24.0
+    }
+  ],
+  "paragraph": {
+    "size": 16.0,
+    "weight": 400,
+    "line": 24.0
+  },
+  "blockMargin": 16.0,
+  "groupLabel": {
+    "size": 22.5,
+    "color": "#b3b3b3",
+    "radius": 4.0,
+    "padX": 8.0,
+    "padY": 4.0,
+    "gap": 4.0
+  },
+  "edge": {
+    "stroke": "#7e7e7e",
+    "width": 2.0,
+    "endOffset": 7.0,
+    "cpMin": 70.0,
+    "cpMax": 150.0,
+    "arrow": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        6.5,
+        10.4
+      ],
+      [
+        -6.5,
+        10.4
+      ]
+    ]
+  },
+  "edgeLabel": {
+    "size": 20.0,
+    "color": "#dadada",
+    "bg": "#1C1C1C",
+    "radius": 4.0,
+    "pad": 6.0,
+    "line": 26.0
+  },
+  "colors": {
+    "1": "#fb464c",
+    "2": "#e9973f",
+    "3": "#e0de71",
+    "4": "#44cf6e",
+    "5": "#53dfdd",
+    "6": "#a882ff"
+  },
+  "mono": "Source Code Pro",
+  "link": "#61afef",
+  "highlight": "#5b4d1f",
+  "tagText": "#e5c07b",
+  "tagBg": "#20242b",
+  "nodeLabel": {
+    "size": 15.0,
+    "color": "#515663",
+    "line": 19.5,
+    "gap": 7.73
+  },
+  "inlineTitle": {
+    "size": 25.888,
+    "weight": 600,
+    "line": 31.0656,
+    "marginBottom": 12.944
+  }
+}

@@ -1,0 +1,401 @@
+{
+ "nodes": [
+  {
+   "id": "filenote",
+   "type": "file",
+   "runs": [
+    {
+     "text": "embedded-note",
+     "tag": "div",
+     "cls": "inline-title",
+     "fontSize": 25.89,
+     "fontWeight": "600",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 185.84,
+     "h": 31
+    },
+    {
+     "text": "Embedded note",
+     "tag": "h1",
+     "cls": "",
+     "fontSize": 25.89,
+     "fontWeight": "700",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 61.09,
+     "w": 180.75,
+     "h": 31
+    },
+    {
+     "text": "First paragraph of the embedded note, long enough ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 110.16,
+     "w": 373.81,
+     "h": 19
+    },
+    {
+     "text": "to wrap inside the node",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 134.16,
+     "w": 172.19,
+     "h": 19
+    },
+    {
+     "text": "\nit is displayed in.",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 158.16,
+     "w": 122.95,
+     "h": 19
+    },
+    {
+     "text": "a list item",
+     "tag": "li",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 43.78,
+     "y": 199.34,
+     "w": 72.12,
+     "h": 19
+    },
+    {
+     "text": "another",
+     "tag": "li",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 43.78,
+     "y": 225.72,
+     "w": 57.48,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "mod-header mod-ui",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 31.06
+    },
+    {
+     "cls": "el-h1",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 61.09,
+     "w": 374,
+     "h": 31.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 108.16,
+     "w": 374,
+     "h": 72
+    },
+    {
+     "cls": "el-ul",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 196.16,
+     "w": 374,
+     "h": 52.75
+    },
+    {
+     "cls": "li",
+     "tag": "li",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 43.78,
+     "y": 196.16,
+     "w": 347.22,
+     "h": 26.38
+    },
+    {
+     "cls": "li",
+     "tag": "li",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 43.78,
+     "y": 222.53,
+     "w": 347.22,
+     "h": 26.38
+    }
+   ]
+  },
+  {
+   "id": "fileimg",
+   "type": "file",
+   "runs": [
+    {
+     "text": "sample-image.png",
+     "tag": "div",
+     "cls": "canvas-node-label",
+     "fontSize": 15,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(81, 86, 99)",
+     "decoration": "none",
+     "x": 0,
+     "y": -27.23,
+     "w": 145.05,
+     "h": 20.87
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "linknode",
+   "type": "link",
+   "runs": [
+    {
+     "text": "https://jsoncanvas.org",
+     "tag": "div",
+     "cls": "canvas-node-label",
+     "fontSize": 15,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(81, 86, 99)",
+     "decoration": "none",
+     "x": 0,
+     "y": -27.23,
+     "w": 177.73,
+     "h": 20.87
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "filesub",
+   "type": "file",
+   "runs": [
+    {
+     "text": "Embedded note",
+     "tag": "h1",
+     "cls": "",
+     "fontSize": 25.89,
+     "fontWeight": "700",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 17.09,
+     "w": 180.75,
+     "h": 31
+    },
+    {
+     "text": "First paragraph of the embedded note, long enough ",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 58.16,
+     "w": 373.81,
+     "h": 19
+    },
+    {
+     "text": "to wrap inside the node",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 82.16,
+     "w": 172.19,
+     "h": 19
+    },
+    {
+     "text": "\nit is displayed in.",
+     "tag": "p",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 17,
+     "y": 106.16,
+     "w": 122.95,
+     "h": 19
+    },
+    {
+     "text": "a list item",
+     "tag": "li",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 43.78,
+     "y": 147.34,
+     "w": 72.12,
+     "h": 19
+    },
+    {
+     "text": "another",
+     "tag": "li",
+     "cls": "",
+     "fontSize": 16,
+     "fontWeight": "400",
+     "fontStyle": "normal",
+     "color": "rgb(220, 221, 222)",
+     "decoration": "none",
+     "x": 43.78,
+     "y": 173.72,
+     "w": 57.48,
+     "h": 19
+    }
+   ],
+   "blocks": [
+    {
+     "cls": "markdown-preview-pusher",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17,
+     "w": 1,
+     "h": 0.09
+    },
+    {
+     "cls": "mod-header mod-ui",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 17.09,
+     "w": 374,
+     "h": 31.06
+    },
+    {
+     "cls": "el-p",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 56.16,
+     "w": 374,
+     "h": 72
+    },
+    {
+     "cls": "el-ul",
+     "tag": "div",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 17,
+     "y": 144.16,
+     "w": 374,
+     "h": 52.75
+    },
+    {
+     "cls": "li",
+     "tag": "li",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 43.78,
+     "y": 144.16,
+     "w": 347.22,
+     "h": 26.37
+    },
+    {
+     "cls": "li",
+     "tag": "li",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "paddingLeft": 0,
+     "lineHeight": "24px",
+     "x": 43.78,
+     "y": 170.53,
+     "w": 347.22,
+     "h": 26.38
+    }
+   ]
+  }
+ ],
+ "edges": []
+}
