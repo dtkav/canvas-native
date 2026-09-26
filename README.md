@@ -22,9 +22,12 @@ skill directory after putting `canvas-native` on your PATH.
 
 `make package` builds a static Linux x86-64 binary and writes a tarball and
 SHA-256 checksum to `dist/`. It needs Rust 1.94.1, the
-`x86_64-unknown-linux-musl` target, and `musl-tools`. The archive contains the
-binary and both licenses. Pushing a `v` tag that matches the Cargo version runs
-the same build on GitHub Actions and publishes the archive as a GitHub release.
+`x86_64-unknown-linux-musl` target, `musl-tools`, and Python 3.11 or newer.
+
+Pushing an annotated `v` tag that matches the Cargo version builds and tests
+Linux x86-64 and ARM64, macOS Intel and Apple Silicon, and Windows x86-64 on
+GitHub Actions. The tag message becomes the release notes. Each archive contains
+the binary and both licenses, and has a matching SHA-256 checksum.
 
 ## License
 

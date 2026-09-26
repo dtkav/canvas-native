@@ -11,47 +11,60 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    name: ${{ matrix.target }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            target: x86_64-unknown-linux-musl
+          - runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-musl
+          - runner: macos-15-intel
+            target: x86_64-apple-darwin
+          - runner: macos-15
+            target: aarch64-apple-darwin
+          - runner: windows-2025
+            target: x86_64-pc-windows-msvc
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
       - name: Install musl linker
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y musl-tools
-          rustup target add x86_64-unknown-linux-musl
+      - name: Install Rust target
+        shell: bash
+        run: rustup target add "${{ matrix.target }}"
       - uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            target/x86_64-unknown-linux-musl/release
-          key: rust-1.94.1-x86_64-unknown-linux-musl-release-${{ hashFiles('Cargo.lock') }}
-          restore-keys: rust-1.94.1-x86_64-unknown-linux-musl-release-
+            target/${{ matrix.target }}/release
+          key: rust-1.94.1-${{ matrix.target }}-release-${{ hashFiles('Cargo.lock') }}
+          restore-keys: rust-1.94.1-${{ matrix.target }}-release-
       - name: Check tag version
         if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
         run: |
           version="$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml)"
           test "$GITHUB_REF_NAME" = "v$version"
-      - name: Build archive
-        run: make package
-      - name: Verify binary and archive
-        run: |
-          if readelf -l target/x86_64-unknown-linux-musl/release/canvas-native | grep -q INTERP; then
-            echo "Binary is dynamically linked" >&2
-            exit 1
-          fi
-          printf '%s\n' '{"nodes":[{"id":"a","type":"text","x":0,"y":0,"width":240,"height":120,"text":"Hello Canvas"}],"edges":[]}' > /tmp/smoke.canvas
-          target/x86_64-unknown-linux-musl/release/canvas-native /tmp/smoke.canvas /tmp/smoke.svg --agent
-          target/x86_64-unknown-linux-musl/release/canvas-native /tmp/smoke.canvas /tmp/smoke.png --agent
-          file /tmp/smoke.png | grep -q 'PNG image data'
-          cd dist
-          sha256sum -c *.sha256
-          tar -tzf *.tar.gz
+      - name: Build binary
+        shell: bash
+        run: cargo build --release --locked --target "${{ matrix.target }}"
+      - name: Smoke-test and package
+        shell: bash
+        run: python scripts/package_release.py "${{ matrix.target }}"
       - uses: actions/upload-artifact@v7
         with:
-          name: canvas-native-linux-x86_64
+          name: canvas-native-${{ matrix.target }}
           path: dist/*
           if-no-files-found: error
 
@@ -64,8 +77,14 @@ jobs:
     steps:
       - uses: actions/download-artifact@v7
         with:
-          name: canvas-native-linux-x86_64
+          pattern: canvas-native-*
+          merge-multiple: true
           path: dist
+      - name: Verify all release assets
+        run: |
+          cd dist
+          test "$(find . -maxdepth 1 -name '*.sha256' | wc -l)" -eq 5
+          sha256sum -c ./*.sha256
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,4 +93,4 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --verify-tag \
             --title "$GITHUB_REF_NAME" \
-            --generate-notes
+            --notes-from-tag

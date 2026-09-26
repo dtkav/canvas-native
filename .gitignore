@@ -2,6 +2,7 @@
 /canvas-native
 /target/
 /dist/
+__pycache__/
 
 # rendered examples
 /out/
