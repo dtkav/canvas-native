@@ -1,6 +1,6 @@
 TARGET ?= x86_64-unknown-linux-musl
 DIST_DIR ?= dist
-VERSION := $(shell cargo pkgid --locked | sed 's/.*@//')
+VERSION := $(shell sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml)
 ARCHIVE := canvas-native-v$(VERSION)-$(TARGET).tar.gz
 
 .PHONY: build package
