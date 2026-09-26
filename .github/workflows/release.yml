@@ -1,0 +1,77 @@
+name: Build and release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install musl linker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y musl-tools
+          rustup target add x86_64-unknown-linux-musl
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/x86_64-unknown-linux-musl/release
+          key: rust-1.94.1-x86_64-unknown-linux-musl-release-${{ hashFiles('Cargo.lock') }}
+          restore-keys: rust-1.94.1-x86_64-unknown-linux-musl-release-
+      - name: Check tag version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          version="$(cargo pkgid --locked | sed 's/.*@//')"
+          test "$GITHUB_REF_NAME" = "v$version"
+      - name: Build archive
+        run: make package
+      - name: Verify binary and archive
+        run: |
+          if readelf -l target/x86_64-unknown-linux-musl/release/canvas-native | grep -q INTERP; then
+            echo "Binary is dynamically linked" >&2
+            exit 1
+          fi
+          printf '%s\n' '{"nodes":[{"id":"a","type":"text","x":0,"y":0,"width":240,"height":120,"text":"Hello Canvas"}],"edges":[]}' > /tmp/smoke.canvas
+          target/x86_64-unknown-linux-musl/release/canvas-native /tmp/smoke.canvas /tmp/smoke.svg --agent
+          target/x86_64-unknown-linux-musl/release/canvas-native /tmp/smoke.canvas /tmp/smoke.png --agent
+          file /tmp/smoke.png | grep -q 'PNG image data'
+          cd dist
+          sha256sum -c *.sha256
+          tar -tzf *.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: canvas-native-linux-x86_64
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: canvas-native-linux-x86_64
+          path: dist
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes

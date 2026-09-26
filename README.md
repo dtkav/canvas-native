@@ -18,6 +18,14 @@ canvas-native file.canvas out.png
 Register this directory as an agent skill, or copy `SKILL.md` into your agent's
 skill directory after putting `canvas-native` on your PATH.
 
+## Release build
+
+`make package` builds a static Linux x86-64 binary and writes a tarball and
+SHA-256 checksum to `dist/`. It needs Rust 1.94.1, the
+`x86_64-unknown-linux-musl` target, and `musl-tools`. The archive contains the
+binary and both licenses. Pushing a `v` tag that matches the Cargo version runs
+the same build on GitHub Actions and publishes the archive as a GitHub release.
+
 ## License
 
 MIT. Inter is embedded under the SIL Open Font License 1.1; see

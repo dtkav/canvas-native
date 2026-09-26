@@ -1,6 +1,7 @@
 # build output
 /canvas-native
 /target/
+/dist/
 
 # rendered examples
 /out/
