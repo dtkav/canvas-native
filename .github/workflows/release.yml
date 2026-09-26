@@ -69,12 +69,16 @@ jobs:
           if-no-files-found: error
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/download-artifact@v7
         with:
           pattern: canvas-native-*
@@ -89,8 +93,20 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/* \
-            --repo "$GITHUB_REPOSITORY" \
+          version="$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml)"
+          tag="v$version"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            test "$GITHUB_REF_NAME" = "$tag"
+          fi
+          if ! git show-ref --verify --quiet "refs/tags/$tag"; then
+            echo "No $tag tag yet; release will run when it is pushed"
+            exit 0
+          fi
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag is already published"
+            exit 0
+          fi
+          gh release create "$tag" dist/* \
             --verify-tag \
-            --title "$GITHUB_REF_NAME" \
+            --title "$tag" \
             --notes-from-tag
