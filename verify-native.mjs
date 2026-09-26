@@ -8,7 +8,7 @@ import { join } from "node:path";
 const [, , title, file] = process.argv;
 const PORT = process.env.OBSIDIAN_DEBUG_PORT ?? "9222";
 const scratch = join(mkdtempSync(join(tmpdir(), "canvas-verify-")), "verify.svg");
-execFileSync(new URL("./canvas-render", import.meta.url).pathname, [file, scratch]);
+execFileSync(new URL("./canvas-native", import.meta.url).pathname, [file, scratch]);
 const svg = readFileSync(scratch, "utf8");
 const mine = [...svg.matchAll(/<path d="([^"]+)"/g)].map((m) => m[1]);
 

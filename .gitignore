@@ -1,5 +1,5 @@
 # build output
-/canvas-render
+/canvas-native
 /target/
 
 # rendered examples

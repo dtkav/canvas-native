@@ -735,7 +735,7 @@ fn main() {
 
     if positional.is_empty() || flag("--help") {
         eprintln!(
-            "usage: canvas-render <file.canvas> [out.svg|out.png] [options]\n\n\
+            "usage: canvas-native <file.canvas> [out.svg|out.png] [options]\n\n\
              \x20 --agent          for reading: SVG without embedded fonts, image\n\
              \x20                  sized so a viewer will not rescale it\n\
              \x20 --light          light theme\n\

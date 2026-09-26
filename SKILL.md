@@ -13,8 +13,8 @@ it will carry overlaps you never see.
 Render after every edit, and read the render.
 
 ```bash
-canvas-render file.canvas /tmp/c.svg --agent   # positions, as text you can read
-canvas-render file.canvas /tmp/c.png --agent   # appearance, which needs an image
+canvas-native file.canvas /tmp/c.svg --agent   # positions, as text you can read
+canvas-native file.canvas /tmp/c.png --agent   # appearance, which needs an image
 ```
 
 The binary sits beside this file if it is not already on your PATH.
@@ -82,7 +82,7 @@ wastes detail and shifts every coordinate away from the ones in the SVG.
 After changing part of a canvas, render that part:
 
 ```bash
-canvas-render file.canvas /tmp/c.png --agent --focus envoy,vault,tap
+canvas-native file.canvas /tmp/c.png --agent --focus envoy,vault,tap
 ```
 
 The crop takes the bounding box of those nodes plus their surroundings and
@@ -98,9 +98,9 @@ midpoint, then reported overlaps in a file that had none.
 ## Producing one for a person
 
 ```bash
-canvas-render file.canvas diagram.png            # 2x pixel ratio
-canvas-render file.canvas diagram.svg            # Inter embedded, so it travels
-canvas-render file.canvas diagram.svg --light    # light theme
+canvas-native file.canvas diagram.png            # 2x pixel ratio
+canvas-native file.canvas diagram.svg            # Inter embedded, so it travels
+canvas-native file.canvas diagram.svg --light    # light theme
 ```
 
 Send the SVG when someone may edit or scale it, the PNG when they will only

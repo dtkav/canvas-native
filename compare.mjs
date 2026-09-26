@@ -15,7 +15,7 @@ const fixture = JSON.parse(readFileSync(fixturePath, "utf8"));
 // The binary reports its own layout in node-local coordinates, so this
 // compares like with like instead of reconstructing tops from baselines.
 const layoutPath = join(tmpdir(), "canvas-compare.layout.json");
-execFileSync(new URL("./canvas-render", import.meta.url).pathname, [canvasPath, layoutPath]);
+execFileSync(new URL("./canvas-native", import.meta.url).pathname, [canvasPath, layoutPath]);
 const laid = JSON.parse(readFileSync(layoutPath, "utf8"));
 const byNode = new Map();
 for (const r of laid) {
