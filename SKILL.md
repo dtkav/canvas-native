@@ -5,10 +5,9 @@ description: Write, edit, and check JSON Canvas (.canvas) files, the format Obsi
 
 # Canvas
 
-Authoring a canvas means placing boxes by arithmetic. Every node carries an
-absolute rect, nothing reflows, and the file records nothing when a label
-overruns its box or an edge cuts through a group. Write one without looking and
-it will carry overlaps you never see.
+Every node carries an absolute rect, nothing reflows, and the file records
+nothing when a label overruns its box or an edge cuts through a group. Write
+one without looking and it will carry overlaps you never see.
 
 Render after every edit, and read the render.
 
@@ -40,6 +39,46 @@ defaulting to an arrow on the `to` end), `label`, and `color`.
 
 `color` takes `"1"` through `"6"` for red, orange, yellow, green, cyan, and
 purple, or a hex string. Omit it and the node keeps the theme border.
+
+That is the whole format in brief. For the full attribute tables, ID
+conventions, and a validation checklist, read `references/json-canvas.md`.
+For complete canvases to pattern a mind map, project board, research canvas,
+or flowchart on, read `references/json-canvas-examples.md`.
+
+## Drawing one
+
+Canvases fall into a few kinds, and the examples in
+`references/json-canvas-examples.md` cover most of them.
+
+| kind | shape | pattern on |
+| --- | --- | --- |
+| architecture | components as boxes, boundaries as groups, flows as labelled edges | the flowchart's edges inside the project board's groups |
+| flowchart | steps top to bottom, decisions branching, edges labelled | Flowchart |
+| mind map | one centre node with branches radiating, no groups | Simple Canvas with Text and Connections |
+| project board | groups as columns, cards as short text nodes, few edges | Project Board with Groups |
+| research canvas | `file` and `link` nodes around the notes that cite them | Research Canvas with Files and Links |
+
+Whatever the kind, the same three steps get a good one.
+
+1. Sketch it in ASCII first: the boxes, how they group, and only the edges
+   that matter, with a name and at most one line inside each box. The sketch
+   forces the choice of what goes in and caps how much gets said. A box that
+   needs a paragraph in ASCII needs a note, not a canvas.
+2. Write the canvas by hand from the sketch, sizing each box with the numbers
+   below, and render it to SVG with `--agent`.
+3. Read the SVG and fix what it shows: a text run below its box, a label over
+   a node, an edge through a box it does not connect, group labels colliding.
+   Render again. Stop when a pass finds nothing, then hand over the `.canvas`
+   file.
+
+Write the file yourself and read the render yourself. A layout generator or a
+collision checker takes longer than the drawing and takes the looking out of
+the loop; the SVG already carries every coordinate.
+
+The sketch does the most work on architecture diagrams and flowcharts, where
+the edges carry the meaning. Boards and research canvases have few edges, so
+their loop is about fit: cards the same size, columns the same width, nothing
+clipped.
 
 ## Sizing a node
 

@@ -16,7 +16,8 @@ canvas-native file.canvas out.png
 
 `SKILL.md` teaches an agent to render after every edit and read the result.
 Register this directory as an agent skill, or copy `SKILL.md` into your agent's
-skill directory after putting `canvas-native` on your PATH.
+skill directory after putting `canvas-native` on your PATH. `references/`
+carries kepano's JSON Canvas format reference and example canvases.
 
 ## Release build
 
@@ -32,5 +33,8 @@ the binary and both licenses, and has a matching SHA-256 checksum.
 ## License
 
 MIT. Inter is embedded under the SIL Open Font License 1.1; see
-`assets/Inter-LICENSE.txt`. Obsidian is a trademark of Dynalist Inc., which
+`assets/Inter-LICENSE.txt`. `references/json-canvas.md` and
+`references/json-canvas-examples.md` are the JSON Canvas skill and examples
+from [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills),
+copyright Steph Ango, MIT. Obsidian is a trademark of Dynalist Inc., which
 has no connection to this project.
