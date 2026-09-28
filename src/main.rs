@@ -361,6 +361,9 @@ pub struct LaidRun {
     node: String,
     text: String,
     x: f64,
+    /// Where the first visible glyph lands. Equal to `x` unless the run
+    /// begins with whitespace.
+    vx: f64,
     y: f64,
     size: f64,
     weight: u16,
@@ -475,6 +478,7 @@ fn build_svg(
                     node: node.id.clone(),
                     text: label.clone(),
                     x: gl.pad_x,
+                    vx: gl.pad_x,
                     y: top - node.y + gl.pad_y,
                     size: gl.size,
                     weight: 400,
@@ -517,6 +521,7 @@ fn build_svg(
                 node: node.id.clone(),
                 text: caption.clone(),
                 x: 0.0,
+                vx: 0.0,
                 y: -nl.gap - nl.size * 0.82,
                 size: nl.size,
                 weight: 400,
@@ -585,22 +590,44 @@ fn build_svg(
                 let text_top = line.top
                     + (line.height - engine.text_height(run.size as f32) as f64) / 2.0;
                 let mut local_x = theme.node.pad_x + run.x;
-                if layout::is_rtl(&run.text) {
+                let rtl = layout::is_rtl(&run.text);
+                if rtl {
                     let w = engine.measure_styled(&run.text, run.size as f32, run.weight, run.italic) as f64;
                     local_x = node.width - theme.node.pad_x - w;
                 }
+                // An SVG viewer collapses whitespace at the start of a text
+                // element, which would slide the run's first glyph left by
+                // the width of that space: `**bold** then` would draw as
+                // "boldthen". The element therefore starts at the first
+                // visible glyph, moved right by what the whitespace measured,
+                // and a run that is only whitespace draws nothing at all.
+                // Trailing whitespace costs nothing since the next run is
+                // placed absolutely, so it is trimmed as well.
+                let shown = run.text.trim_start();
+                if shown.is_empty() {
+                    continue;
+                }
+                let lead = if rtl || shown.len() == run.text.len() {
+                    0.0
+                } else {
+                    (engine.measure_styled(&run.text, run.size as f32, run.weight, run.italic)
+                        - engine.measure_styled(shown, run.size as f32, run.weight, run.italic)) as f64
+                };
+                let drawn = shown.trim_end();
+                let visible_x = local_x + lead;
                 if !run.style.marker {
                     layout_out.push(LaidRun {
                         node: node.id.clone(),
                         text: run.text.clone(),
                         x: local_x,
+                        vx: visible_x,
                         y: text_top,
                         size: run.size,
                         weight: run.weight,
                         italic: run.italic,
                     });
                 }
-                let x = node.x + local_x;
+                let x = node.x + visible_x;
                 let fill = if run.style.tag {
                     theme.tag_text.as_str()
                 } else if run.style.link {
@@ -624,7 +651,7 @@ fn build_svg(
                     "Inter, Noto Sans, Noto Sans CJK JP, Noto Color Emoji, sans-serif"
                 };
                 if run.style.mark {
-                    let w = engine.measure_styled(&run.text, run.size as f32, run.weight, run.italic) as f64;
+                    let w = engine.measure_styled(drawn, run.size as f32, run.weight, run.italic) as f64;
                     let _ = write!(
                         svg,
                         r#"<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{c}"/>"#,
@@ -637,10 +664,10 @@ fn build_svg(
                     r#"<text x="{x}" y="{y}" font-family="{f}" font-size="{s}" font-weight="{wt}"{it} fill="{c}">{t}</text>"#,
                     x = x, y = baseline, f = family, s = run.size, wt = run.weight,
                     it = if run.italic { r#" font-style="italic""# } else { "" },
-                    c = fill, t = escape(&run.text)
+                    c = fill, t = escape(drawn)
                 );
                 if run.style.strike {
-                    let w = engine.measure_styled(&run.text, run.size as f32, run.weight, run.italic) as f64;
+                    let w = engine.measure_styled(drawn, run.size as f32, run.weight, run.italic) as f64;
                     let _ = write!(
                         svg,
                         r#"<rect x="{x}" y="{y}" width="{w}" height="1.2" fill="{c}"/>"#,
