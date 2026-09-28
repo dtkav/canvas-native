@@ -91,6 +91,23 @@ canvas("inline2", [
          x=470, y=340),
 ])
 
+# Whitespace beside an inline style. The plain text after `**bold**` is a run
+# that begins with a space, and an SVG viewer collapses whitespace at the
+# start of a text element, so the run's glyphs slide left by one space unless
+# the renderer draws from the first visible glyph. The run's rect starts at
+# the space either way, which is why extract-fixture.mjs records where the
+# first visible glyph sits (`vx`) as well as where the run starts (`x`).
+canvas("whitespace", [
+    text("after-bold", "**bold** then plain"),
+    text("after-italic", "*italic* then plain", x=470),
+    text("after-code", "`code` then plain", x=940),
+    text("after-strike", "~~strike~~ then plain", x=1410),
+    text("after-mark", "==mark== then plain", x=0, y=340),
+    text("after-link", "[[Wikilink]] then plain", x=470, y=340),
+    text("between", "**one** **two** and *three* *four* end", x=940, y=340),
+    text("paren", "**Control plane** (PocketBase) and `POST /token` issues", x=1410, y=340),
+])
+
 # array order is paint order, so the group must cover the node written before it
 canvas("zorder", [
     text("under", "## under\nshould be behind the group", x=0, y=0, width=400, height=200),

@@ -102,13 +102,19 @@ ws.onopen = async () => {
           range.setEnd(t, i + 1);
           const r = range.getBoundingClientRect();
           if (!r.width && !r.height) continue;
+          const ch = t.textContent[i];
           const key = Math.round(r.top);
           const last = lines[lines.length - 1];
+          // A run's rect starts at its first character even when that is a
+          // space, so the first visible glyph is recorded separately: it is
+          // where a viewer that collapses leading whitespace would go wrong.
+          const visible = ch.trim() ? r.left : null;
           if (last && last.key === key) {
-            last.text += t.textContent[i];
+            last.text += ch;
             last.right = r.right;
+            if (last.first === null) last.first = visible;
           } else {
-            lines.push({ key, text: t.textContent[i], rect: r, right: r.right });
+            lines.push({ key, text: ch, rect: r, right: r.right, first: visible });
           }
         }
         for (const line of lines) {
@@ -124,6 +130,7 @@ ws.onopen = async () => {
             decoration: cs.textDecorationLine,
             ...local(line.rect),
             w: +((line.right - line.rect.left) / scale).toFixed(2),
+            vx: line.first === null ? null : +((line.first - box.left) / scale).toFixed(2),
           });
         }
       }

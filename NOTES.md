@@ -31,11 +31,22 @@ Verify with `compare.mjs`, which reports per-run x drift against the app.
 
 ## Fixtures
 
-`fixtures/make-fixtures.py` writes eight conformance canvases into a vault,
+`fixtures/make-fixtures.py` writes nine conformance canvases into a vault,
 along with the note and image the `file` nodes point at: markdown constructs,
 node types, edges (all sixteen side pairs), unicode, extremes, nesting, inline
-edge cases, and z-order. `extract-fixture.mjs` records what Obsidian rendered
-for each; `compare.mjs` diffs this renderer against that.
+edge cases, whitespace beside inline styles, and z-order.
+`extract-fixture.mjs` records what Obsidian rendered for each, including
+where each run's first visible glyph sits; `compare.mjs` diffs this renderer
+against that.
+
+## Inline code and highlight spans
+
+Obsidian gives a `code` or `mark` span horizontal padding and sets code in
+its monospace face at 14px; this renderer draws both flush and measures code
+with Inter. Every run after such a span on the same line starts a few pixels
+early, and a line that is close to its width can wrap one word later than the
+app. The `whitespace` fixture's `after-code`, `after-mark`, and `paren`
+nodes show the drift.
 
 ## Not implemented
 

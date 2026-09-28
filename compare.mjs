@@ -33,14 +33,18 @@ const report = [];
 
 for (const node of fixture.nodes) {
   if (!node.runs.length) continue;
+  // `vx` is where the first visible glyph lands, which differs from `x` when
+  // the run begins with a space. Fixtures recorded before it existed carry
+  // no `vx`, and for those the check is skipped rather than failed.
   let mine = (byNode.get(node.id) ?? []).map((r) => ({
     text: r.text, x: +r.x.toFixed(2), y: +r.y.toFixed(2),
+    vx: r.vx == null ? null : +r.vx.toFixed(2),
     size: r.size, weight: r.weight, italic: r.italic,
   }));
 
   const theirs = node.runs.map((r) => ({
     text: r.text.replace(/\n/g, "").trim(),
-    x: r.x, y: r.y, size: r.fontSize,
+    x: r.x, y: r.y, vx: r.vx ?? null, size: r.fontSize,
     weight: +r.fontWeight, italic: r.fontStyle === "italic",
   })).filter((r) => r.text);
 
@@ -71,11 +75,13 @@ for (const node of fixture.nodes) {
       continue;
     }
     const dx = Math.abs(got.x - want.x), dy = Math.abs(got.y - shift - want.y);
+    const dvx = got.vx != null && want.vx != null ? Math.abs(got.vx - want.vx) : 0;
     const styled = got.size.toFixed(0) === want.size.toFixed(0)
       && got.weight === want.weight && got.italic === want.italic;
-    if (dx <= 2 && dy <= 2 && styled) { matched++; continue; }
+    if (dx <= 2 && dy <= 2 && dvx <= 2 && styled) { matched++; continue; }
     const why = [];
     if (dx > 2) why.push(`x ${got.x} vs ${want.x}`);
+    if (dvx > 2) why.push(`glyph x ${got.vx} vs ${want.vx}`);
     if (dy > 2) why.push(`y ${(got.y - shift).toFixed(2)} vs ${want.y}`);
     if (got.size.toFixed(0) !== want.size.toFixed(0)) why.push(`size ${got.size} vs ${want.size}`);
     if (got.weight !== want.weight) why.push(`weight ${got.weight} vs ${want.weight}`);
